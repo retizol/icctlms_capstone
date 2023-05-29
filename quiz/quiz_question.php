@@ -6,8 +6,8 @@ include 'navbarsession.php';
 ob_start();
 $get_id = $_GET['id'];
 ?>
-<body style="padding-top: 110px">
-	<div class="container">
+<body>
+	<div class="container bg-white p-4 border rounded">
 		<?php //action="quiz_question.php?id=  echo $get_id;"
 		$query = mysqli_query($conn,"SELECT * from quiz where quiz_id = '$get_id'")or die(mysqli_error());
 		$row  = mysqli_fetch_array($query);
@@ -20,7 +20,7 @@ $get_id = $_GET['id'];
 					<input class="form-control mr-2" type="text" name="quiz_title" value="<?php echo $row['quiz_title']; ?>" id="qTitle"  placeholder="Quiz Title">
 					<br>
 					<label class="mr-2" for="qDescription">Quiz Description</label>
-					<input class="form-control mr-2" type="text" value="<?php echo $row['quiz_description'];?>" class="span8" name="description" id="qDescription" placeholder="Quiz Description" required>
+					<input class="form-control mr-2" type="text" value="<?php echo $row['quiz_description'];?>" name="description" id="qDescription" placeholder="Quiz Description" required>
 					<br>
 					<button name="saveqt" type="submit" class="btn btn-success">Save</button>
 				</div>
@@ -36,12 +36,7 @@ $get_id = $_GET['id'];
 				}
 				?>
 <hr>
-	</div>
 
-
-
-
-	<div class="container">
 		<div class="float-right">
 			<a href="teacher_quiz.php" class="btn btn-success">Back</a>
 			<a href="add_question.php<?php echo '?id='.$get_id;?>" class="btn btn-info">Add Question</a>
@@ -98,7 +93,7 @@ $get_id = $_GET['id'];
 								<td width="30">
 									<input id="optionsCheckbox" class="" name="selector[]" type="checkbox" value="<?php echo $id; ?>">
 								</td>
-								<td class="text-truncate noselect" style="max-width: 6rem" ><?php echo $row['question_text']; ?></td>
+								<td class="text-truncate noselect" style="max-width: 5rem" ><?php echo $row['question_text']; ?></td>
 								<td><?php  echo $row['question_type']; ?></td>
 								<td><?php  echo $row['answer']; ?></td>
 								<!--td><!?php echo $row['date_added']; ?--></td-->

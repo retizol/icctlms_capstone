@@ -3,23 +3,26 @@ include '../includes/dbh.inc.php';
 include 'headerq.php';
 include 'session.php';
 include 'navbarsession.php';
+if ((!isset($usrcid)) || !($usrcid == '1' || $usrcid == '2')) {
+  header('location: ../dashboard.php');
+}
 ob_start();
 $get_id = $_GET['id'];
 
 ?>
-<body style="padding-top: 110px">
-  <div class="container">
+<body>
+  <div class="container bg-white p-4 border rounded">
       <a href="quiz_question.php<?php echo '?id='.$get_id; ?>" class="btn btn-success">Back</a>
       <form class="mt-3" method="post">
           <div class="">
-            <h5 class="">Question</h5>
+            <h6 class="text-muted">Add Question</h6>
             <textarea class="form-control" name="question" id="ckeditor_full" ></textarea>
           </div>
         <!--Choices from sql <option value=""></option>-->
         <div class="">
 
           <div class="mt-3">
-            <label class="">Question Type:</label>
+            <label class="text-muted">Question Type:</label>
             <select class="form-control w-50 mb-3" id="qSelect" name="question_type">
               <option value="" disabled selected>Choose Question</option>
               <option value="1">Multiple Choice</option>
@@ -98,7 +101,7 @@ $get_id = $_GET['id'];
         </div>
 
           <div class="mt-3 mb-3">
-            <label class="control-label" for="pts">Points</label>
+            <label class="text-muted" for="pts">Points</label>
             <input class="form-control w-25" type="number" name="points" id="pts" min=1 max=5 required>
             <small>min of 1 max of 5 </small>
           </div>
@@ -119,19 +122,19 @@ $get_id = $_GET['id'];
 
         if ($type  == '2'){
           $tof = $_POST['correct'];
-          mysqli_query($conn,"INSERT INTO quiz_question (quiz_id, question_text, date_added, answer, question_type_id, points) values('$get_id','$question', NOW(),'$tof','$type','$points')")or die(mysqli_error());
+          mysqli_query($conn,"INSERT INTO quiz_question (quiz_id, question_text, date_added, answer, question_type_id, points) VALUES('$get_id','$question', NOW(),'$tof','$type','$points')")or die(mysqli_error());
         }else{
 
-          mysqli_query($conn,"INSERT into quiz_question (quiz_id,question_text,date_added,answer,question_type_id,points) values('$get_id','$question', NOW(),'$answer','$type','$points')")or die(mysqli_error());
+          mysqli_query($conn,"INSERT INTO quiz_question (quiz_id,question_text,date_added,answer,question_type_id,points) VALUES('$get_id','$question', NOW(),'$answer','$type','$points')")or die(mysqli_error());
 
-          $query = mysqli_query($conn,"SELECT * from quiz_question order by quiz_question_id DESC LIMIT 1")or die(mysqli_error());
+          $query = mysqli_query($conn,"SELECT * FROM quiz_question ORDER BY quiz_question_id DESC LIMIT 1");
           $row = mysqli_fetch_array($query);
           $quiz_question_id = $row['quiz_question_id'];
 
-          mysqli_query($conn,"INSERT into answer (quiz_question_id, answer_text, choices) values('$quiz_question_id','$ans1','A')")or die(mysqli_error());
-          mysqli_query($conn,"INSERT into answer (quiz_question_id,answer_text,choices) values('$quiz_question_id','$ans2','B')")or die(mysqli_error());
-          mysqli_query($conn,"INSERT into answer (quiz_question_id,answer_text,choices) values('$quiz_question_id','$ans3','C')")or die(mysqli_error());
-          mysqli_query($conn,"INSERT into answer (quiz_question_id,answer_text,choices) values('$quiz_question_id','$ans4','D')")or die(mysqli_error());
+          mysqli_query($conn,"INSERT INTO answer (quiz_question_id, answer_text, choices) VALUES('$quiz_question_id','$ans1','A')");
+          mysqli_query($conn,"INSERT INTO answer (quiz_question_id,answer_text,choices) VALUES('$quiz_question_id','$ans2','B')");
+          mysqli_query($conn,"INSERT INTO answer (quiz_question_id,answer_text,choices) VALUES('$quiz_question_id','$ans3','C')");
+          mysqli_query($conn,"INSERT INTO answer (quiz_question_id,answer_text,choices) VALUES('$quiz_question_id','$ans4','D')");
         }
         header('Location: quiz_question.php?id=' . $get_id);
     }?>

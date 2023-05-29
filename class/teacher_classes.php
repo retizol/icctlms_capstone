@@ -4,10 +4,16 @@ include 'headerq.php';
 include '../session.php';
 include 'navbarsession.php';
 ob_start();
-
+if ((!isset($usrcid)) || !($usrcid == '1' || $usrcid == '2')) {
+  header('location: ../dashboard.php');
+}
 ?>
-<body style="padding-top: 110px">
+<body>
+
+
 <div class="container">
+
+
   <div class="row">
       <div class="col-sm-12 ">
         <h4 class="float-left">My Classes</h4>
@@ -16,13 +22,11 @@ ob_start();
       </div>
 </div>
 
-
-
 <div class="container">
       <br>
         <div class="row" >
             <?php
-            $sqltcs= mysqli_query($conn, "SELECT * From create_class WHERE teacher_id = '$usrid'");
+            $sqltcs= mysqli_query($conn, "SELECT * FROM create_class WHERE teacher_id = '$usrid'");
             $count = mysqli_num_rows($sqltcs);
               if ($count > 0){
               while($rows=mysqli_fetch_assoc($sqltcs)){
@@ -40,13 +44,18 @@ ob_start();
                       <p class="card-text text-truncate mb-1"><b>Description:</b> <span class="text-secondary lead " style="font-size: 16px;"><?php echo $rows['class_description']; ?></span></p>
                       <br>
 
-                    <a class="btn btn-success mr-4" href="thisclass.php<?php echo '?id='.$id;?>">Open</a>
-                    <a class="btn btn-danger " href="#<?php echo $id; ?>" data-toggle="modal">Remove</a>
+                      <div class="d-flex justify-content-around">
+                    <a class="btn btn-success" href="thisclass.php<?php echo '?id='.$id;?>">Open</a>
 
+                    <!--a class="btn btn-warning text-light" href="#edit<!?php echo $id; ?>" data-toggle="modal">&nbsp;Edit&nbsp;</a-->
+
+                    <a class="btn btn-danger " href="#<?php echo $id; ?>" data-toggle="modal">Remove</a>
+                    <a class="disabled" href="#"></a>
+                    </div>
                 </div>
               </div></a>
             </div>
-                  <!-- Modal -->
+                  <!-- Modal remove-->
               <div id="<?php echo $id; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
                 		<div class="modal-dialog" role="document">
@@ -68,7 +77,29 @@ ob_start();
               </div>
             </div>
           </div>
-                      <!-- Modal -->
+                      <!-- Modal for code-->
+
+                      <div id="#edit<?php echo $id; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mycode" aria-hidden="true">
+
+                        		<div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 id="mycode">Remove Class</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+
+                        </div>
+                          <div class="modal-body">
+                          <div class="alert alert-danger">
+                            Are you sure you want to Remove this class?
+                          </div>
+                          </div>
+                        <div class="modal-footer">
+                          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                              <!-- Modal -->
 
             <?php }}?>
 
@@ -90,7 +121,7 @@ ob_start();
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Create Class</h4>
+          <h4 class="modal-title">Add Class</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <br>

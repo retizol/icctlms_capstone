@@ -13,7 +13,7 @@
 					  <a class="nav-link text-light" href="#">Support</a>
 				  </li>
 				  <li class="nav-item dropdown">
-					  <a class="nav-link dropdown-toggle text-light" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Campuses</a>
+					  <a class="nav-link dropdown-toggle text-light" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Campuses</a>
 					  <div class="dropdown-menu" aria-labelledby="dropdown01">
 						  <a class="dropdown-item" href="#">Main Campus - Cainta</a>
 						  <a class="dropdown-item" href="#">Antipolo</a>

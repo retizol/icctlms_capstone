@@ -29,6 +29,16 @@
 
 <div class="col-sm-4 mb-3">
   <div class="card" >
+    <a href="class/add_assignment.php" class="card-link"><img class="card-img-top" src="images/assignment.jpg" alt="Card image cap"></a>
+    <div class="card-body text-center">
+      <a href="class/add_assignment.php" class="card-link text-dark"><h5 class="card-text font-weight-normal" style="color: #40D0AD"><b>ASSIGNMENT</b></h5>
+      <p class="card-text text-secondary lead" style="font-size: 16px">Create assignment for your students</p></a>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-4 mb-3">
+  <div class="card" >
     <a href="settings.php" class="card-link"><img class="card-img-top" src="images/settings.jpg" alt="Card image cap"></a>
     <div class="card-body text-center">
       <a href="settings.php" class="card-link text-dark"><h5 class="card-text font-weight-normal" style="color:#9677DF"><b>SETTINGS</b></h5>

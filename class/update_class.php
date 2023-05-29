@@ -4,7 +4,8 @@ include '../session.php';
 
 
 $class_id=$_GET['updateclass_id'];
-$sql="Select * from `create_class` where class_id=$class_id";
+
+$sql="SELECT * from create_class where class_id=$class_id";
 $result=mysqli_query($conn,$sql);
 $row=mysqli_fetch_assoc($result);
 $class_name=$row['class_name'];

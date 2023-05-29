@@ -4,11 +4,11 @@ include 'headerq.php';
 include '../session.php';
 include 'navbarsession.php';?>
 <?php $get_id = $_GET['id']; ?>
-<body style="padding-top: 110px">
+<body>
   <div class="container">
     <a  href="thisclass.php<?php echo '?id='.$get_id; ?>"  class="btn btn-success" name="">Back</a>
     <form action="delete_class_quiz.php<?php echo '?id='.$get_id; ?>" method="post">
-      <a data-toggle="modal" href="#backup_delete" id="delete"  class="btn btn-danger" name="">Delete</a>
+      <a data-toggle="modal" href="#backup_delete" id="delete"  class="btn btn-danger " name="">Delete</a>
       <!--?php include('modal_delete_class_quiz.php'); ?-->
       <!--Modal-->
       <div id="backup_delete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

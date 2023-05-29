@@ -16,7 +16,7 @@ $usrfname = $_SESSION['userfname'];
 $usrlname = $_SESSION['userlname'];
 $usremail = $_SESSION['useremail'];
 
-$user_query = mysqli_query($conn,"SELECT * FROM users WHERE usersId = '$usrid'")or die(mysqli_error());
-$user_row = mysqli_fetch_array($user_query);
-
+if (empty($usrid)) {
+    header('Location: ../index.php');
+}
 ?>

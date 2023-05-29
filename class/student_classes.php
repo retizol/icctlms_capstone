@@ -5,22 +5,22 @@ include '../session.php';
 include 'navbarsession.php';
 ob_start();
 ?>
-<body style="padding-top: 110px;">
-  <div class="container mb-4">
-            <div class="row">
+<body>
+  <div class="container mb-4 bg-white p-4 border rounded">
+            <div class="row mb-4">
                 <div class="col-sm-12 ">
                   <h4 class="float-left">My Classes</h4>
                   <button class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal3">Join Class</button>
                 </div>
                 </div>
-  </div>
+
 
 <!--NEED TO ADD WITHDRAW BUTTON-->
-      <div class="container">
+
         <div class="row">
 
                     <?php
-                    $sql= mysqli_query($conn, "SELECT * From create_class left join teacher_class_student On create_class.class_id = teacher_class_student.class_id inner join users on users.usersId = create_class.teacher_id WHERE student_id = '$usrid'")or die(mysqli_error());
+                    $sql= mysqli_query($conn, "SELECT * FROM create_class LEFT JOIN teacher_class_student ON create_class.class_id = teacher_class_student.class_id INNER JOIN users ON users.usersId = create_class.teacher_id WHERE student_id = '$usrid'")or die(mysqli_error());
                     $count = mysqli_num_rows($sql);
                     	if ($count > 0){
                       while($row=mysqli_fetch_assoc($sql)){
@@ -34,18 +34,44 @@ ob_start();
 
                         <div class="col-md-4 mb-3" data-target="#cardlink<?php echo $id;?>">
                           <a id="cardlink<?php echo $id;?>" href="../quiz/studentclass.php<?php echo '?id='.$id;?>" class="card-link text-dark">
-                          <div class="card" style="height: 190px">
+                            <!--?php style="height: 190px; border-left: 3px solid; border-left-color: red" ?-->
+                          <div class="card" >
                             <div class="card-body">
                               <p class="card-title" style="height: 20px;"><b>Class Name: <?php echo $class_name; ?></b></hp>
                                 <p class="card-text text-truncate mb-2"><b>Description:</b> <span class="text-secondary lead " style="font-size: 16px; "><?php echo $class_description; ?></span></p>
                               <p class="card-text mb-3"><b>Professor:</b> <?php echo $class_profF .'&nbsp;'. $class_profL; ?></p>
+                              <div class="d-flex justify-content-around">
+                                <a class="btn btn-success" href="../quiz/studentclass.php<?php echo '?id='.$id;?>">View Class</a>
+                                <a class="btn btn-danger " href="#<?php echo $id; ?>" data-toggle="modal">Withdraw</a>
+                                <a class="disabled" href="#"></a>
+                              </div>
 
-                              <a class="btn btn-success mr-4" href="studentclass.php<?php echo '?id='.$id;?>">Open</a>
-                              <a class="btn btn-danger " href="#<?php echo $id; ?>" data-toggle="modal">Remove</a>
                             </div>
                           </div></a>
                         </div>
+                        <!-- Modal -->
+                    <div id="<?php echo $id; ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 id="myModalLabel">Remove Class</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+
+                      </div>
+                        <div class="modal-body">
+                        <div class="alert alert-danger">
+                          Are you sure you want to withdraw this class?
+                        </div>
+                        </div>
+                      <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                        <button id="<?php echo $id; ?>" class="btn btn-danger remove" name="remove">Yes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                            <!-- Modal -->
                     <?php }}?>
                     <div class="col-md-4 mb-3" data-toggle="modal" data-target="#myModal3">
                       <div class="card p-4" style="height: 190px">
@@ -59,8 +85,6 @@ ob_start();
           </div>
         </div>
 
-
-
         <!--START OF MODAL-->
         <form method="POST">
           <div class="modal" id="myModal3">
@@ -68,7 +92,7 @@ ob_start();
               <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                  <h4 class="modal-title">Search a Class</h4>
+                  <h4 class="modal-title">Join Class</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <br>
@@ -111,7 +135,7 @@ ob_start();
           </td>
           <td ><!?php echo $row['class_name']; ?></td>
           <td ><!?php echo $row['class_description']; ?></td>
-          <td ><a href="../quiz/student_quiz_list.php<?php echo '?id='.$id;?>" class="btn btn-primary">View Class</a></td>
+          <td ><a href="../quiz/student_quiz_list.php</?php echo '?id='.$id;?>" class="btn btn-primary">View Class</a></td>
         </tr>//END OF TABLE EDITION
        ?-->
        <?php
@@ -125,5 +149,22 @@ ob_start();
 
         ?>
         <?php include 'script.php'; ?>
+        <script type="text/javascript">
+        $(document).ready( function() {
+          $('.remove').click( function() {
+          var id = $(this).attr("id");
+            $.ajax({
+            type: "POST",
+            url: "delete_joined_class.php",
+            data: ({id: id}),
+            cache: false,
+            success: function(html){
+            location.reload();
+            }
+            });
+            return false;
+          });
+        });
+        </script>
 </body>
 </html>

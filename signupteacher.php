@@ -7,7 +7,7 @@
 	<div class="container col-sm-3">
 		<section>
 		<h4>Sign up as a Teacher</h4>
-		<form action="includes/signupteacher.inc.php" method="POST">
+		<form action="includes/signupteacher.inc.php" method="POST" class="mb-3">
       <label for="first">Name</label>
 			<input class="form-control" type="text" name="first" placeholder="First Name"><br>
 			<input class="form-control" type="text" name="last" placeholder="Last Name"><br>

@@ -1,22 +1,9 @@
-<?php 
-
-$conn= new mysqli('localhost', 'root', '', 'class_3rdsem2022');
-
-if(!$conn){
-    die(mysql_error($con));
-}
-
-if(isset($_GET['deleteclass_name'])){
-	$class_name=$_GET['deleteclass_name'];
-
-	$sql="delete from `teacher_class_student` where class_name=$class_name";
-	$result=mysqli_query($con,$sql);
-	if($result){
-		//echo "Deleted successfull";
-		header('location:student_classes.php');
-	}else{
-		die(mysql_error($con));
-	}
-}
-
+<?php
+include '../includes/dbh.inc.php';
+$get_id = $_POST['id'];
+mysqli_query($conn,"DELETE from teacher_class_student  where  class_id = '$get_id' ")or die(mysqli_error());
+//mysqli_query($conn,"DELETE from teacher_class_announcements  where  teacher_class_id = '$get_id' ")or die(mysqli_error());
+//mysqli_query($conn,"DELETE from teacher_notification  where  teacher_class_id = '$get_id' ")or die(mysqli_error());
+//mysqli_query($conn,"DELETE from class_subject_overview where  teacher_class_id = '$get_id' ")or die(mysqli_error());
+header('location: student_classes.php');
 ?>

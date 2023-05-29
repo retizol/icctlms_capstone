@@ -1,13 +1,12 @@
 <?php
-  include_once 'header.php';
+  include 'header.php';
   include 'session.php';
   include_once 'navbarsession.php';
 
 
 ?>
-<div style="padding-top: 110px;">
+<body>
 
-</div>
 <?php
 if ($usrcid == '2') {
   include 'dashboard_teacher.php';

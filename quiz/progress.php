@@ -6,8 +6,8 @@
 										        <tr>
 												<th>Quiz Title</th>
 												<th>Description</th>
-												<th>Quiz Time</th>
-												<th></th>
+												<!--th>Quiz Time</th-->
+												<th>Score</th>
 												</tr>
 										</thead>
 										<tbody>
@@ -31,8 +31,8 @@
 										<tr>
 										 <td><?php echo $row['quiz_title']; ?></td>
                                          <td><?php  echo $row['quiz_description']; ?></td>
-                                         <td><?php  echo $row['quiz_time'] / 60; ?></td>
-                                         <td width="200">
+                                         <!--td></?php  echo $row['quiz_time'] / 60; ?></td-->
+                                         <td width="150">
 
 										<b>Score <?php echo $grade; ?></b>
 

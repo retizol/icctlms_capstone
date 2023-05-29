@@ -9,7 +9,8 @@ include 'navbarsession.php';
 <?php $quiz_id = $_GET['quiz_id']; ?>
 <?php $quiz_time = $_GET['quiz_time']; ?>
 
-<?php $query1 = mysqli_query($conn,"SELECT * from student_class_quiz where student_id = '$usrid' and class_quiz_id = '$class_quiz_id' ")or die(mysqli_error());
+<?php
+$query1 = mysqli_query($conn,"SELECT * from student_class_quiz where student_id = '$usrid' and class_quiz_id = '$class_quiz_id' ")or die(mysqli_error());
 	  $count = mysqli_num_rows($query1);
 ?>
 <?php
@@ -19,18 +20,21 @@ if ($count > 0){
 }
  ?>
 
- <style>
- #group div{
-     display: none;
+<style>
+ .noselect {
+ -webkit-touch-callout: none; /* iOS Safari */
+ 	-webkit-user-select: none; /* Safari */
+ 	 -khtml-user-select: none; /* Konqueror HTML */
+ 		 -moz-user-select: none; /* Old versions of Firefox */
+ 			-ms-user-select: none; /* Internet Explorer/Edge */
+ 					user-select: none; /* Non-prefixed version, currently
+ 																supported by Chrome, Edge, Opera and Firefox */
  }
- #group div.current{
-     display: block;
- }
- </style>
 
+</style>
 
-<body style="padding-top: 110px">
-	<div class="container ">
+<body>
+	<div class="container bg-white p-4 border rounded">
 		<div>
 			<?php
 			if($_GET['test'] == 'ok'){
@@ -60,7 +64,7 @@ if ($count > 0){
 				<?php
 					$sqla = mysqli_query($conn,"SELECT * FROM class_quiz
 					LEFT JOIN quiz ON quiz.quiz_id  = class_quiz.quiz_id
-					where teacher_class_id = '$get_id'
+					WHERE teacher_class_id = '$get_id'
 					order by date_added DESC ")or die(mysqli_error());
 					$rowa = mysqli_fetch_array($sqla);
 
@@ -100,7 +104,7 @@ if ($count > 0){
 				<!--div class="questions-table"-->
 
 					<?php
-					$sqlw = mysqli_query($conn,"SELECT * FROM quiz_question where quiz_id = '$quiz_id'  ORDER BY RAND()");
+					$sqlw = mysqli_query($conn,"SELECT * FROM quiz_question WHERE quiz_id = '$quiz_id'  ORDER BY RAND()");
 					$qt = mysqli_num_rows($sqlw);
 					while($roww = mysqli_fetch_array($sqlw)){
 						?>
@@ -113,7 +117,7 @@ if ($count > 0){
 							<div class="mb-3">Points <?php echo $roww['points'];?></div>
 							<hr class="p-0 ">
 							<div id="qa" >
-								<div class="">
+								<div class="noselect">
 									<?php echo $roww['question_text'];?>
 								</div>
 
@@ -187,9 +191,6 @@ if ($count > 0){
 				<input type="hidden" name="x" value="<?php echo $x;?>">
 			</form>
 
-
-
-
 			<?php
 		} else if(isset($_POST['submit_answer'])){
 			$x1 = $_POST['x'];
@@ -206,10 +207,6 @@ if ($count > 0){
 				}
 
 			} ?>
-			<a href="studentclass.php<?php echo '?id='.$get_id; ?>">Back</a>
-			<center>
-				<h3><br>Your score is <b><?php echo $score; ?></b>/<b><?php echo ($x-1); ?></b><br/></h3>
-			</center>
 			<?php
 			/* echo "Your Percentage Grade is : <b>".$per."%</b>"; */
 			mysqli_query($conn,"UPDATE student_class_quiz SET student_quiz_time = 3600, grade = '".$score."/".($x-1)."' WHERE student_id = '$usrid' and class_quiz_id = '$class_quiz_id'")or die(mysqli_error());
@@ -224,31 +221,6 @@ if ($count > 0){
 </div>
 
 <?php include 'script.php'; ?>
-<!--script>
-function updateItems(delta)
-{
-		var $items = $('#group').children();
-		var $current = $items.filter('.current');
-		var index = $current.index();
-		var newIndex = index+delta;
-		// Range check the new index
-		newIndex = (newIndex < 0) ? 0 : ((newIndex > $items.length) ? $items.length : newIndex);
-		if (newIndex != index){
-				$current.removeClass('current');
-				$current = $items.eq(newIndex).addClass('current');
-				// Hide/show the next/prev
-				$("#prev").toggle(!$current.is($items.first()));
-				$("#next").toggle(!$current.is($items.last()));
-		}
-}
-$("#next").click(function () {
-		updateItems(1);
-});
-$("#prev").click(function () {
-		updateItems(-1);
-});
-
-</script-->
 
 </body>
 </html>

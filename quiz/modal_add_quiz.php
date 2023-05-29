@@ -29,11 +29,8 @@
 					$quiz_title = $_POST['quiz_title'];
 					$description = $_POST['description'];
 					mysqli_query($conn,"INSERT into quiz (quiz_title, quiz_description, date_added, teacher_id) values('$quiz_title', '$description', NOW(), '$usrid')")or die(mysqli_error());
-					?>
-					<script>
-					window.location = 'teacher_quiz.php';
-					</script>
-					<?php
+
+          header('Location: teacher_quiz.php');
 					}
 					?>
       </div>

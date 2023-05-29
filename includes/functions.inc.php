@@ -60,7 +60,6 @@ function pwdMatch($pwd, $pwdRepeat) {
 //Signup and login form
 //mysqli_stmt_init() function initializes a statement and returns an object suitable for mysqli_stmt_prepare()
 //fetch_assoc() / mysqli_fetch_assoc() function fetches a result row as an associative array.
-//for mysqli_stmt_bind_param visit https://www.w3schools.com/php/php_mysql_prepared_statements.asp
 $host = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 function uidExists($conn, $username, $email) {

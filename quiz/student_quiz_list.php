@@ -1,13 +1,11 @@
 <div class="">
 
-
   <table cellpadding="0" cellspacing="0" border="0" class="table" id="">
       <thead>
 				<tr>
           <th>Quiz Title</th>
           <th>Description</th>
-          <th>Quiz Time</th>
-          <th>Score</th>
+          <!--th>Quiz Time</th-->
           <th></th>
         </tr>
       </thead>
@@ -29,8 +27,8 @@
         <tr>
           <td><?php echo $row['quiz_title']; ?></td>
           <td><?php  echo $row['quiz_description']; ?></td>
-          <td><?php  echo $row['quiz_time'] / 60; ?> mins</td>
-          <td width="200">
+          <!--td></?php  echo $row['quiz_time'] / 60; ?> mins</td-->
+          <td width="150">
             <a class="card-link" data-placement="bottom" title="Take This Quiz" id="</?php echo $id; ?>Download" href="take_test.php<?php echo '?id='.$get_id ?>&<?php echo 'class_quiz_id='.$id; ?>&<?php echo 'test=ok' ?>&<?php echo 'quiz_id='.$quiz_id; ?>&<?php echo 'quiz_time='.$quiz_time; ?> ">Take This Quiz</a>
 
             <!--?php if ($grade == ""){ ?>
@@ -49,4 +47,5 @@
     <?php } ?>
   </tbody>
 </table>
+
 </div>

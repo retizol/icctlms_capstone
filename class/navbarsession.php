@@ -38,19 +38,21 @@
 				  <li class="nav-item">
 					  <a class="mr-3" href="#" style="color: white; font-size: 25px;"><i class="fa fa-bell" aria-hidden="true"></i></a>
 				  </li-->
-          <li class="nav-item mt-3"><p class=" text-white text-uppercase mr-3"><?php echo $usruid . '_ ' . $usrlname . ", " . $usrfname; ?></p></p></li>
+          <li class="nav-item"><p class=" text-white text-uppercase mt-2 mb-0 mr-3"><?php include '../navbarcreds.php'; echo $uuid . '_ ' . $lastn . ", " . $firstn;?></p></li>
+          <li class="nav-item mr-2"><a class="nav-link" href="../settings.php"><i class="fa fa-cog fa-lg m-0 text-white" aria-hidden="true"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="../includes/logout.inc.php"><i class="fa fa-power-off fa-lg m-0 text-white" aria-hidden="true"></i></a></li>
 			  </ul>
-			  <ul class="navbar-nav">
+			  <!--ul class="navbar-nav">
 				  <li class="nav-item dropdown">
 					  <a class="nav-link text-light" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../images/williemascot.png" class="img-fluid rounded-circle border border-white" alt="willie_mascot" width="40" style="vertical-align: middle; border-width: 1px !important"></a>
 					  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown02">
-						  <a class="dropdown-item" href="../studentprofile.php"><i class="fa fa-user"></i> Profile</a>
+
 						  <a class="dropdown-item" href="../settings.php"><i class="fa fa-wrench"></i> Settings</a>
 						  <div class="dropdown-divider"></div>
 						  <a class="dropdown-item" href="../includes/logout.inc.php"><i class="fa fa-sign-out"></i> Logout</a>
 					  </div>
 				  </li>
-			  </ul>
+			  </ul-->
 		  </div>
 		</div>
 	</nav>
